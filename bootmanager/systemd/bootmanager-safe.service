@@ -1,0 +1,27 @@
+[Unit]
+Description=Focus Raspberry Pi Bootmanager (Safe Mode)
+Documentation=https://github.com/yourusername/focus
+After=network-online.target led-manager.service ngrok-ssh.service
+Wants=network-online.target
+Requires=led-manager.service
+
+[Service]
+Type=simple
+User=focus
+Group=focus
+WorkingDirectory=/home/focus/focus/bootmanager
+Environment="PATH=/home/focus/focus/bootmanager/venv/bin:/usr/local/bin:/usr/bin:/bin"
+Environment="PYTHONPATH=/home/focus/focus/bootmanager:/home/focus/focus/shared"
+ExecStart=/home/focus/focus/bootmanager/venv/bin/python3 -m src.main
+
+# Safe mode: Only restart 5 times in 10 minutes, then give up
+Restart=on-failure
+RestartSec=30
+StartLimitInterval=600
+StartLimitBurst=5
+
+StandardOutput=append:/var/log/bootmanager.log
+StandardError=append:/var/log/bootmanager.error.log
+
+[Install]
+WantedBy=multi-user.target

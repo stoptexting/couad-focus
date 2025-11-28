@@ -1,0 +1,304 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Neobrutalist monochromatic palette with blue accent */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 5%;
+
+    --card: 210 17% 98%;
+    --card-foreground: 0 0% 5%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 5%;
+
+    --primary: 217 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 17% 98%;
+    --secondary-foreground: 0 0% 5%;
+
+    --muted: 210 17% 93%;
+    --muted-foreground: 215 14% 45%;
+
+    --accent: 213 100% 96%;
+    --accent-foreground: 217 100% 50%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 5%;
+    --input: 0 0% 5%;
+    --ring: 217 100% 50%;
+
+    /* No border radius for brutalist look */
+    --radius: 0;
+  }
+
+  .dark {
+    --background: 0 0% 5%;
+    --foreground: 210 17% 98%;
+
+    --card: 0 0% 10%;
+    --card-foreground: 210 17% 98%;
+
+    --popover: 0 0% 5%;
+    --popover-foreground: 210 17% 98%;
+
+    --primary: 217 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 210 17% 98%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 215 14% 65%;
+
+    --accent: 217 100% 20%;
+    --accent-foreground: 217 100% 70%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 30%;
+    --input: 0 0% 30%;
+    --ring: 217 100% 50%;
+  }
+
+  /* Smooth scroll */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  * {
+    @apply border-neo-black;
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  /* Force sharp corners everywhere */
+  button, input, select, textarea, [class*="rounded"] {
+    border-radius: 0 !important;
+  }
+}
+
+@layer components {
+  /* === NEOBRUTALIST CARD === */
+  .neo-card {
+    @apply bg-white border-neo border-neo-black shadow-neo p-6;
+    @apply transition-all duration-200 ease-out;
+  }
+  .neo-card:hover {
+    @apply shadow-neo-lg;
+    transform: translate(-3px, -3px);
+  }
+
+  /* === NEOBRUTALIST BUTTONS === */
+  .neo-btn {
+    @apply inline-flex items-center justify-center gap-2;
+    @apply font-display font-bold uppercase tracking-wide text-sm;
+    @apply border-neo border-neo-black;
+    @apply transition-all duration-150 ease-out;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .neo-btn:hover:not(:disabled) {
+    transform: translate(-2px, -2px);
+    @apply shadow-neo-hover;
+  }
+  .neo-btn:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    @apply shadow-neo-active;
+  }
+
+  .neo-btn-primary {
+    @apply neo-btn bg-neo-blue text-white shadow-neo;
+  }
+  .neo-btn-primary:hover:not(:disabled) {
+    @apply bg-neo-blue-deep;
+  }
+
+  .neo-btn-secondary {
+    @apply neo-btn bg-white text-neo-black shadow-neo;
+  }
+  .neo-btn-secondary:hover:not(:disabled) {
+    @apply bg-neo-blue-light;
+  }
+
+  .neo-btn-outline {
+    @apply neo-btn bg-transparent text-neo-black shadow-neo;
+  }
+  .neo-btn-outline:hover:not(:disabled) {
+    @apply bg-neo-offwhite;
+  }
+
+  .neo-btn-ghost {
+    @apply neo-btn bg-transparent text-neo-black border-transparent shadow-none;
+  }
+  .neo-btn-ghost:hover:not(:disabled) {
+    @apply bg-neo-lightgrey border-neo-black;
+  }
+
+  .neo-btn-destructive {
+    @apply neo-btn bg-neo-error text-white shadow-neo;
+  }
+
+  /* Button sizes */
+  .neo-btn-sm {
+    @apply h-9 px-4 text-xs;
+  }
+  .neo-btn-md {
+    @apply h-11 px-6 text-sm;
+  }
+  .neo-btn-lg {
+    @apply h-14 px-8 text-base;
+  }
+  .neo-btn-icon {
+    @apply h-11 w-11 p-0;
+  }
+
+  /* === NEOBRUTALIST INPUTS === */
+  .neo-input {
+    @apply w-full h-11 px-4;
+    @apply font-mono text-sm;
+    @apply bg-white border-neo border-neo-black shadow-neo-sm;
+    @apply transition-all duration-150;
+    @apply placeholder:text-neo-grey;
+  }
+  .neo-input:focus {
+    @apply outline-none shadow-neo-blue border-neo-blue;
+  }
+  .neo-input:disabled {
+    @apply bg-neo-lightgrey opacity-50 cursor-not-allowed;
+  }
+
+  /* === NEOBRUTALIST BADGES === */
+  .neo-badge {
+    @apply inline-flex items-center px-3 py-1;
+    @apply font-display font-bold uppercase text-xs tracking-wide;
+    @apply border-neo-sm border-neo-black;
+  }
+  .neo-badge-primary {
+    @apply neo-badge bg-neo-blue text-white;
+  }
+  .neo-badge-secondary {
+    @apply neo-badge bg-neo-lightgrey text-neo-black;
+  }
+  .neo-badge-success {
+    @apply neo-badge bg-neo-success text-white;
+  }
+  .neo-badge-warning {
+    @apply neo-badge bg-neo-warning text-neo-black;
+  }
+  .neo-badge-error {
+    @apply neo-badge bg-neo-error text-white;
+  }
+
+  /* === NEOBRUTALIST PROGRESS === */
+  .neo-progress {
+    @apply w-full h-6 bg-neo-lightgrey border-neo-sm border-neo-black overflow-hidden;
+  }
+  .neo-progress-bar {
+    @apply h-full bg-neo-blue transition-all duration-300;
+  }
+
+  /* === SCROLL ANIMATION STATES === */
+  .scroll-animate {
+    @apply opacity-0;
+  }
+  .scroll-animate.is-visible {
+    @apply opacity-100;
+  }
+
+  /* Staggered children */
+  .stagger-children > * {
+    @apply opacity-0;
+  }
+  .stagger-children.is-visible > *:nth-child(1) { animation-delay: 0ms; }
+  .stagger-children.is-visible > *:nth-child(2) { animation-delay: 75ms; }
+  .stagger-children.is-visible > *:nth-child(3) { animation-delay: 150ms; }
+  .stagger-children.is-visible > *:nth-child(4) { animation-delay: 225ms; }
+  .stagger-children.is-visible > *:nth-child(5) { animation-delay: 300ms; }
+  .stagger-children.is-visible > *:nth-child(6) { animation-delay: 375ms; }
+  .stagger-children.is-visible > *:nth-child(7) { animation-delay: 450ms; }
+  .stagger-children.is-visible > *:nth-child(8) { animation-delay: 525ms; }
+
+  /* === ANIMATED UNDERLINE === */
+  .animated-underline {
+    @apply relative;
+  }
+  .animated-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-neo-blue;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease-out;
+  }
+  .animated-underline:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* === DECORATIVE ELEMENTS === */
+  .neo-divider {
+    @apply w-full h-1 bg-neo-black my-8;
+  }
+  .neo-divider-blue {
+    @apply w-full h-1 bg-neo-blue my-8;
+  }
+  .neo-dot-grid {
+    background-image: radial-gradient(#0D0D0D 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+  .neo-corner-accent {
+    @apply absolute w-4 h-4 bg-neo-blue border-neo-sm border-neo-black;
+  }
+}
+
+@layer utilities {
+  /* Animation delays */
+  .animation-delay-75 { animation-delay: 75ms; }
+  .animation-delay-100 { animation-delay: 100ms; }
+  .animation-delay-150 { animation-delay: 150ms; }
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-300 { animation-delay: 300ms; }
+  .animation-delay-400 { animation-delay: 400ms; }
+  .animation-delay-500 { animation-delay: 500ms; }
+
+  /* Animation fill modes */
+  .animation-fill-forwards { animation-fill-mode: forwards; }
+  .animation-fill-both { animation-fill-mode: both; }
+
+  /* GPU acceleration */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  /* Text utilities */
+  .text-shadow-neo {
+    text-shadow: 2px 2px 0px #0D0D0D;
+  }
+
+  /* Safe area for mobile */
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}

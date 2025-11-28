@@ -1,0 +1,21 @@
+[Unit]
+Description=LED Matrix Manager Daemon
+Documentation=https://github.com/yourusername/focus
+After=local-fs.target
+
+[Service]
+Type=exec
+User=root
+WorkingDirectory=/home/focus/focus/shared/led_manager
+Environment="PATH=/usr/local/bin:/usr/bin:/bin"
+Environment="PYTHONPATH=/home/focus/focus/shared"
+Environment="LED_SOCKET_PATH=/tmp/led-manager.sock"
+Environment="LED_MOCK_MODE=false"
+ExecStart=/usr/bin/python3 /home/focus/focus/shared/led_manager/led_manager_daemon.py
+Restart=always
+RestartSec=5
+StandardOutput=append:/var/log/led-manager.log
+StandardError=append:/var/log/led-manager.error.log
+
+[Install]
+WantedBy=multi-user.target

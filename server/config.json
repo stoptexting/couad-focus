@@ -1,0 +1,27 @@
+{
+  "hardware": {
+    "led_zones": [
+      {
+        "id": "zone-1",
+        "name": "Sprint 1",
+        "start_led": 0,
+        "end_led": 31,
+        "default_color": [0, 255, 0]
+      },
+      {
+        "id": "zone-2",
+        "name": "Sprint 2",
+        "start_led": 32,
+        "end_led": 63,
+        "default_color": [0, 255, 0]
+      }
+    ],
+    "total_leds": 64,
+    "matrix_width": 64,
+    "matrix_height": 64
+  },
+  "defaults": {
+    "primary_zone": "zone-1",
+    "fallback_to_single": true
+  }
+}

@@ -1,0 +1,21 @@
+[Unit]
+Description=Ngrok SSH Tunnel (Emergency Access)
+Documentation=https://ngrok.com/docs
+After=network-online.target
+Wants=network-online.target
+Before=bootmanager.service
+
+[Service]
+Type=simple
+User=focus
+Group=focus
+WorkingDirectory=/home/focus
+EnvironmentFile=/home/focus/focus/bootmanager/config/ngrok-ssh.env
+ExecStart=/usr/local/bin/ngrok tcp 22 --authtoken=${NGROK_AUTHTOKEN} --log=stdout
+Restart=always
+RestartSec=10
+StandardOutput=append:/var/log/ngrok-ssh.log
+StandardError=append:/var/log/ngrok-ssh.error.log
+
+[Install]
+WantedBy=multi-user.target

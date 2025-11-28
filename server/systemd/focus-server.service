@@ -1,0 +1,22 @@
+[Unit]
+Description=Focus Flask Backend Server
+Documentation=https://github.com/yourusername/focus
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=focus
+Group=focus
+SupplementaryGroups=gpio video
+WorkingDirectory=/home/focus/focus/server
+Environment="PATH=/home/focus/focus/server/venv/bin:/usr/local/bin:/usr/bin:/bin"
+Environment="PYTHONPATH=/home/focus/focus/server:/home/focus/focus/shared"
+ExecStart=/home/focus/focus/server/venv/bin/python3 run.py
+Restart=always
+RestartSec=10
+StandardOutput=append:/var/log/focus-server.log
+StandardError=append:/var/log/focus-server.error.log
+
+[Install]
+WantedBy=multi-user.target

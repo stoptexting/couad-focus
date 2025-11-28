@@ -1,0 +1,19 @@
+[Unit]
+Description=LED Boot Test - Verify LED Hardware at Boot
+Documentation=file:///home/focus/focus/docs/LED_INSTALLATION.md
+DefaultDependencies=no
+Before=led-manager.service bootmanager.service
+After=local-fs.target
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/home/focus/focus
+ExecStart=/usr/bin/python3 /home/focus/focus/shared/led_manager/test_led_boot.py
+StandardOutput=journal
+StandardError=journal
+TimeoutStartSec=15
+RemainAfterExit=no
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,14 @@
+# Core dependencies
+discord.py>=2.3.0
+requests>=2.31.0
+PyYAML>=6.0
+
+# System utilities
+psutil>=5.9.0
+netifaces>=0.11.0
+
+# Additional utilities
+python-dotenv>=1.0.0
+
+# Note: LED matrix control is now handled by shared/led-manager service
+# via Unix socket communication

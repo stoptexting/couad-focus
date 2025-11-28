@@ -1,0 +1,33 @@
+# LED Manager Dependencies
+
+# RGB LED Matrix hardware control (64x64 HUB75E via rpi-rgb-led-matrix)
+# ============================================================================
+# IMPORTANT: This library MUST be compiled on the target Raspberry Pi
+#
+# The library source is included in: external/rpi-rgb-led-matrix/
+#
+# ONE-COMMAND INSTALLATION (Raspberry Pi only):
+#   bash scripts/install_led_library.sh
+#
+# This script will:
+#   - Install build dependencies (python3-dev, cython3, gcc, etc.)
+#   - Compile the C++ library
+#   - Build and install Python bindings
+#   - Verify the installation
+#
+# Installation time: ~5-10 minutes
+#
+# Manual installation (if needed):
+#   cd external/rpi-rgb-led-matrix
+#   make -C lib
+#   make build-python PYTHON=$(which python3)
+#   sudo make install-python PYTHON=$(which python3)
+#
+# Verify installation:
+#   python3 -c "from rgbmatrix import RGBMatrix; print('OK')"
+#
+# Documentation: See docs/LED_INSTALLATION.md
+# ============================================================================
+
+# System utilities
+psutil>=5.9.0
